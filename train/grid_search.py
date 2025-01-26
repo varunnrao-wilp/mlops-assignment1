@@ -3,17 +3,12 @@ import pandas as pd
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV, train_test_split
-from sklearn.preprocessing import StandardScaler
 
 data = pd.read_csv('winequality.csv')
 X = data.drop('quality', axis=1)
 y = data['quality']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
 
 param_grid = {
     'alpha': [0.1, 1.0, 10.0],
@@ -29,13 +24,13 @@ grid_search = GridSearchCV(
     n_jobs=-1
 )
 
-mlflow.set_experiment('ridge_hyperparameter_tuning')
+mlflow.set_experiment('hyperparameter_tuning')
 
 with mlflow.start_run():
-    grid_search.fit(X_train_scaled, y_train)
+    grid_search.fit(X_train, y_train)
 
     best_model = grid_search.best_estimator_
-    y_pred = best_model.predict(X_test_scaled)
+    y_pred = best_model.predict(X_test)
 
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
@@ -46,7 +41,7 @@ with mlflow.start_run():
         'r2': r2
     })
 
-    mlflow.sklearn.log_model(best_model, 'best_ridge_model')
+    mlflow.sklearn.log_model(best_model, 'best_model')
 
 # Print results
 print("Best Parameters:", grid_search.best_params_)

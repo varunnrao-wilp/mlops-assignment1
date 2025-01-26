@@ -12,6 +12,11 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), 'winequality.joblib')
 model = joblib.load(MODEL_PATH)
 
 
+@app.route('/ping', methods=['GET'])
+def pong():
+    return jsonify({"message": "pong"}), 200
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
