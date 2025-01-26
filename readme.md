@@ -1,3 +1,10 @@
-# mlops-test
+# MLOps Assignment 1 - Group 129
 
-Simple Flask application to learn and test the MLOps Assignment before pushing it to the main repo on the WILP account
+| Name                      |   BITS ID   |
+|:--------------------------|:-----------:|
+| VARUN N RAO               | 2023aa05634 |
+| AIJAZ AHMAD RESHI         | 2023ab05044 |
+| GUNDAVARAPU SAI RAGHU RAM | 2023ab05139 |
+| DHANUSH S                 | 2023aa05467 |
+
+MLOps Assignment 1 Code Repo
